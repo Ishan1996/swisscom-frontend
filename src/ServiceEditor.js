@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { createService, updateService, getServices, deleteService } from './serviceapi';
 
-const generateId = () => `id_${Math.random().toString(36).substring(2, 6)}`;
+const generateResourceId = () => `resource_id_${Math.random().toString(36).substring(2, 10)}`;
+const generateOwnerId = () => `owner_id_${Math.random().toString(36).substring(2, 10)}`;
 
 const ServiceEditor = () => {
   const [services, setServices] = useState([]);
@@ -32,7 +33,7 @@ const ServiceEditor = () => {
   const addResource = () => {
     setService({
       ...service,
-      resources: [...service.resources, { id: generateId(), owners: [] }]
+      resources: [...service.resources, { id: generateResourceId(), owners: [] }]
     });
   };
 
@@ -51,7 +52,7 @@ const ServiceEditor = () => {
   const addOwner = (resIndex) => {
     const newResources = [...service.resources];
     newResources[resIndex].owners.push({
-      id: generateId(),
+      id: generateOwnerId(),
       name: '',
       accountNumber: '',
       level: 1
